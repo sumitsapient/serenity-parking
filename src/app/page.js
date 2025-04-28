@@ -151,11 +151,11 @@ export default function Home() {
           <div
             key={slot}
             onClick={() => !parkingData[slot] && setSelectedSlot(slot)}
-            className={`flex flex-col items-center justify-center border rounded-lg p-5 transition-all duration-200 ease-in-out shadow-md hover:scale-105 cursor-pointer ${
+            className={`flex flex-col items-center justify-center rounded-lg p-5 transition-all duration-200 ease-in-out shadow-md hover:scale-105 cursor-pointer ${
               parkingData[slot] ? 'bg-amber-200 hover:bg-amber-300' : 'bg-green-200 hover:bg-green-300'
             }`}
           >
-            <p className="text-lg font-semibold text-center">{slot}</p>
+            <p className="text-lg font-normal font-mono text-center">{slot}</p>
             {parkingData[slot] && (
               <button
                 onClick={(e) => {
