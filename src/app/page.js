@@ -24,6 +24,7 @@ export default function Home() {
   const [showPersonData, setShowPersonData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState({ show: false, message: '', type: '' });
+  const [showHelp, setShowHelp] = useState(false);
 
   const fetchParkingData = async () => {
     const { data, error } = await supabase.from('parking').select('*');
@@ -123,8 +124,17 @@ export default function Home() {
           <div className="w-16 h-16 border-4 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
+<div className="flex items-center mb-6 space-x-3">
+  <h1 className="text-3xl font-bold text-indigo-900">Serenity Parking</h1>
+  <button
+    onClick={() => setShowHelp(true)}
+    className="text-white bg-blue-500 hover:bg-blue-600 rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold"
+    title="How to use?"
+  >
+    ?
+  </button>
+</div>
 
-      <h1 className="text-3xl font-bold mb-6 text-indigo-900">Serenity Parking</h1>
 
       <div className="w-full max-w-md mb-8">
         <input
@@ -220,6 +230,31 @@ export default function Home() {
           </div>
         </div>
       )}
+
+
+      {/* Help Popup */}
+      {showHelp && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-96 animate-fadeIn space-y-4">
+            <h2 className="text-xl font-bold text-center">How to Use</h2>
+            <ul className="list-disc list-inside text-gray-700 space-y-2">
+              <li>Search parking number using the search box.</li>
+              <li>Green color slots are available — click to assign a guest.</li>
+              <li>Yellow color slots are already booked — view guest details.</li>
+              <li>Each day at midnight, all data will reset automatically.</li>
+            </ul>
+            <div className="flex justify-center pt-3">
+              <button
+                onClick={() => setShowHelp(false)}
+                className="px-5 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded transition"
+              >
+                Got it!
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
